@@ -6,16 +6,15 @@
 package fut5app.models;
 
 import java.util.UUID;
+import fut5app.services.Utils;
 
 /**
  *
  * @author Jesé
  */
-public class Jugador {
+public class Jugador extends Persona {
 
     private String id;
-    private String nombre;
-    private String apellido;
     private int altura;
     private String posicion;
     private int goles;
@@ -23,13 +22,14 @@ public class Jugador {
     private boolean capitan;
     private int numeroCamiseta;
     private Equipo equipo;
-
-    public Jugador(String nombre, String apellido, int altura,String posicion, int goles, int partidos, boolean capitan, int numeroCamiseta, Equipo equipo) {
+    
+    Utils utils = new Utils();
+    
+    public Jugador(String nombre, String apellido, int altura, String posicion, int goles, int partidos, boolean capitan, int numeroCamiseta, Equipo equipo) {
+        super(nombre, apellido);
         this.id = UUID.randomUUID().toString();
-        this.nombre = nombre;
-        this.apellido = apellido;
         this.altura = altura;
-        this.posicion = posicion;
+        this.posicion = utils.capitalizeWords(posicion);
         this.goles = goles;
         this.partidos = partidos;
         this.capitan = capitan;
@@ -39,14 +39,6 @@ public class Jugador {
 
     public String getId() {
         return id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
     }
 
     public int getAltura() {
@@ -77,7 +69,20 @@ public class Jugador {
         return equipo;
     }
 
-    public String getNombreCompleto() {
-        return nombre + " " + apellido;
+    public String getInfoLine() {
+        return getNombre() + " " + getApellido() + ", " + getPosicion() + "(" + getNumeroCamiseta() + ") " + (isCapitan() ? "C" : "");
+    }
+
+    public String getLine() {
+        return getNombre() + "," + getApellido() + "," + getAltura() + "," + getPosicion() + "," + getGoles() + "," + getPartidos() + "," + isCapitan() + "," + getNumeroCamiseta() + "," + equipo.getNombre() + "," + equipo.getFechaCreacion() + "," + equipo.getEntrenadorLine();
+    }
+
+    public String getInfo() {
+        String info = ("Nombre: " + getNombre() + "\n"
+                + "Apellido: " + getApellido() + "\n"
+                + "Posición: " + getPosicion() + "\n"
+                + "Capitán: " + (isCapitan() ? "Capitan" : "") + "\n"
+                + "Equipo: " + equipo.getNombre());
+        return info;
     }
 }

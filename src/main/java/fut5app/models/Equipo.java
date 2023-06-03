@@ -7,6 +7,7 @@ package fut5app.models;
 
 import java.util.ArrayList;
 import java.util.List;
+import fut5app.services.Utils;
 
 /**
  *
@@ -18,9 +19,11 @@ public class Equipo {
     private String fechaCreacion;
     private Entrenador entrenador;
     private List<Jugador> jugadores;
+    
+    Utils utils = new Utils();
 
     public Equipo(String nombre, String fechaCreacion, Entrenador entrenador) {
-        this.nombre = nombre;
+        this.nombre = utils.capitalizeWords(nombre);
         this.fechaCreacion = fechaCreacion;
         this.entrenador = entrenador;
         this.jugadores = new ArrayList<>();
@@ -50,11 +53,33 @@ public class Equipo {
         }
         return null;
     }
-    
+
     public void agregarJugador(Jugador jugador) {
-    if (jugadores == null) {
-        jugadores = new ArrayList<>();
+        if (jugadores == null) {
+            jugadores = new ArrayList<>();
+        }
+        jugadores.add(jugador);
     }
-    jugadores.add(jugador);
-}
+
+    public String getEntrenadorLine() {
+        return entrenador.getInfoLine();
+    }
+
+    public boolean existeNumeroCamiseta(int numeroCamiseta) {
+        for (Jugador jugador : jugadores) {
+            if (jugador.getNumeroCamiseta() == numeroCamiseta) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean existeCapitan() {
+        for (Jugador jugador : jugadores) {
+            if (jugador.isCapitan()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
