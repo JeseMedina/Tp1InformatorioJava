@@ -5,7 +5,7 @@
  */
 package fut5app.models;
 
-import fut5app.services.Utils;
+import fut5app.utils.Utils;
 
 /**
  *

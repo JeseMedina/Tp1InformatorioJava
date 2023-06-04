@@ -7,7 +7,7 @@ package fut5app.models;
 
 import java.util.ArrayList;
 import java.util.List;
-import fut5app.services.Utils;
+import fut5app.utils.Utils;
 
 /**
  *

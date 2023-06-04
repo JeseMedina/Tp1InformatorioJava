@@ -6,7 +6,7 @@
 package fut5app.models;
 
 import java.util.UUID;
-import fut5app.services.Utils;
+import fut5app.utils.Utils;
 
 /**
  *
