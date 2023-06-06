@@ -5,8 +5,6 @@
  */
 package fut5app.models;
 
-import fut5app.utils.Utils;
-
 /**
  *
  * @author Jesé
@@ -16,11 +14,9 @@ public class Persona {
     private String nombre;
     private String apellido;
 
-    Utils utils = new Utils();
-    
     public Persona(String nombre, String apellido) {
-        this.nombre = utils.capitalizeWords(nombre);
-        this.apellido = utils.capitalizeWords(apellido);
+        this.nombre = nombre;
+        this.apellido = apellido;
     }
 
     public String getNombre() {

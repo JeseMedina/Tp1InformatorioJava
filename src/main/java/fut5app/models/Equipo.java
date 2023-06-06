@@ -7,7 +7,6 @@ package fut5app.models;
 
 import java.util.ArrayList;
 import java.util.List;
-import fut5app.utils.Utils;
 
 /**
  *
@@ -19,11 +18,9 @@ public class Equipo {
     private String fechaCreacion;
     private Entrenador entrenador;
     private List<Jugador> jugadores;
-    
-    Utils utils = new Utils();
 
     public Equipo(String nombre, String fechaCreacion, Entrenador entrenador) {
-        this.nombre = utils.capitalizeWords(nombre);
+        this.nombre = nombre;
         this.fechaCreacion = fechaCreacion;
         this.entrenador = entrenador;
         this.jugadores = new ArrayList<>();

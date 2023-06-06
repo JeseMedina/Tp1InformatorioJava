@@ -7,17 +7,21 @@ package fut5app.services;
 
 import java.util.Scanner;
 import fut5app.models.Entrenador;
+import fut5app.services.interfaces.IEntrenadorService;
+import fut5app.utils.Utils;
 
 /**
  *
  * @author Jesé
  */
-public class EntrenadorService {
+public class EntrenadorService implements IEntrenadorService {
 
     Scanner scanner = new Scanner(System.in);
+    Utils utils = new Utils();
 
-    protected Entrenador crearEntranador() {
-        String nombreEntrenador = obtenerNombreEntrenador();
+    @Override
+    public Entrenador crearEntranador() {
+        String nombreEntrenador = utils.capitalizeWords(obtenerNombreEntrenador());
         String apellidoEntrenador = obtenerApellidoEntrenador();
         int edadEntrenador = obtenerEdadEntrenador();
 

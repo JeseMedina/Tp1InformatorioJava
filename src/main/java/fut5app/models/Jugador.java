@@ -6,7 +6,6 @@
 package fut5app.models;
 
 import java.util.UUID;
-import fut5app.utils.Utils;
 
 /**
  *
@@ -22,14 +21,12 @@ public class Jugador extends Persona {
     private boolean capitan;
     private int numeroCamiseta;
     private Equipo equipo;
-    
-    Utils utils = new Utils();
-    
+
     public Jugador(String nombre, String apellido, int altura, String posicion, int goles, int partidos, boolean capitan, int numeroCamiseta, Equipo equipo) {
         super(nombre, apellido);
         this.id = UUID.randomUUID().toString();
         this.altura = altura;
-        this.posicion = utils.capitalizeWords(posicion);
+        this.posicion = posicion;
         this.goles = goles;
         this.partidos = partidos;
         this.capitan = capitan;

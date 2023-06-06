@@ -8,6 +8,8 @@ package fut5app.services;
 import fut5app.models.Entrenador;
 import fut5app.models.Equipo;
 import fut5app.models.Jugador;
+import fut5app.services.interfaces.IEquipoService;
+import fut5app.utils.Utils;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,14 +21,16 @@ import java.util.Scanner;
  *
  * @author Jesé
  */
-public class EquipoService {
+public class EquipoService implements IEquipoService{
 
     Scanner scanner = new Scanner(System.in);
     EntrenadorService entrenadorService = new EntrenadorService();
     JugadorService jugadorService = new JugadorService();
+    Utils utils = new Utils();
 
-    protected Equipo crearEquipo() {
-        String nombreEquipo = obtenerNombreEquipo();
+    @Override
+    public Equipo crearEquipo() {
+        String nombreEquipo = utils.capitalizeWords(obtenerNombreEquipo());
         String fechaCreacion = obtenerFechaCreacion();
         System.out.println("----- ENTRENADOR -----");
         Entrenador entrenador = entrenadorService.crearEntranador();
@@ -84,7 +88,8 @@ public class EquipoService {
         } while (opcionJugador);
     }
 
-    protected void buscarEquipoPorNombreInformacionBasica(List<Equipo> equipos) {
+    @Override
+    public void buscarEquipoPorNombreInformacionBasica(List<Equipo> equipos) {
         System.out.println("----- BUSCAR EQUIPO POR NOMBRE (INFORMACIÓN BÁSICA) -----");
 
         boolean flag = true;
@@ -109,7 +114,8 @@ public class EquipoService {
         }
     }
 
-    protected void buscarEquipoPorNombreMostrarJugadores(List<Equipo> equipos) {
+    @Override
+    public void buscarEquipoPorNombreMostrarJugadores(List<Equipo> equipos) {
         System.out.println("----- BUSCAR EQUIPO POR NOMBRE (MOSTRAR JUGADORES) -----");
 
         boolean flag = true;
@@ -137,7 +143,8 @@ public class EquipoService {
         }
     }
 
-    protected void eliminarEquipoPorNombre(List<Equipo> equipos) {
+    @Override
+    public void eliminarEquipoPorNombre(List<Equipo> equipos) {
         System.out.println("----- ELIMINAR EQUIPO POR NOMBRE -----");
 
         boolean flag = true;
@@ -161,17 +168,20 @@ public class EquipoService {
         }
     }
 
-    protected void buscarEquipoPorNombreMostrarJugadoresOrdenadosPorNombre(List<Equipo> equipos) {
+    @Override
+    public void buscarEquipoPorNombreMostrarJugadoresOrdenadosPorNombre(List<Equipo> equipos) {
         System.out.println("----- BUSCAR EQUIPO POR NOMBRE (MOSTRAR JUGADORES ORDENADOS POR NOMBRE) -----");
         buscarEquipoPorNombreMostrarJugadoresOrdenados(equipos, Comparator.comparing(Jugador::getNombre));
     }
 
-    protected void buscarEquipoPorNombreMostrarJugadoresOrdenadosPorCamiseta(List<Equipo> equipos) {
+    @Override
+    public void buscarEquipoPorNombreMostrarJugadoresOrdenadosPorCamiseta(List<Equipo> equipos) {
         System.out.println("----- BUSCAR EQUIPO POR NOMBRE (MOSTRAR JUGADORES ORDENADOS POR NÚMERO DE CAMISETA) -----");
         buscarEquipoPorNombreMostrarJugadoresOrdenados(equipos, Comparator.comparingInt(Jugador::getNumeroCamiseta));
     }
 
-    protected void buscarEquipoPorNombreMostrarJugadoresOrdenadosPorPosicionYCamiseta(List<Equipo> equipos) {
+    @Override
+    public void buscarEquipoPorNombreMostrarJugadoresOrdenadosPorPosicionYCamiseta(List<Equipo> equipos) {
         System.out.println("----- BUSCAR EQUIPO POR NOMBRE (MOSTRAR JUGADORES ORDENADOS POR POSICIÓN Y NÚMERO DE CAMISETA) -----");
         buscarEquipoPorNombreMostrarJugadoresOrdenados(equipos, Comparator.comparing(Jugador::getPosicion).thenComparingInt(Jugador::getNumeroCamiseta));
     }

@@ -7,6 +7,8 @@ package fut5app.services;
 
 import fut5app.models.Equipo;
 import fut5app.models.Jugador;
+import fut5app.services.interfaces.IJugadorService;
+import fut5app.utils.Utils;
 import java.util.List;
 import java.util.Scanner;
 
@@ -14,15 +16,17 @@ import java.util.Scanner;
  *
  * @author Jesé
  */
-public class JugadorService {
+public class JugadorService implements IJugadorService {
 
     Scanner scanner = new Scanner(System.in);
+    Utils utils = new Utils();
 
-    protected Jugador crearJugador(Equipo equipo) {
-        String nombreJugador = ingresarNombreJugador();
-        String apellidoJugador = ingresarApellidoJugador();
+    @Override
+    public Jugador crearJugador(Equipo equipo) {
+        String nombreJugador = utils.capitalizeWords(ingresarNombreJugador());
+        String apellidoJugador = utils.capitalizeWords(ingresarApellidoJugador());
         int alturaJugador = ingresarAlturaJugador();
-        String posicionJugador = ingresarPosicionJugador();
+        String posicionJugador = utils.capitalizeWords(ingresarPosicionJugador());
         int golesJugador = ingresarGolesJugador();
         int partidosJugador = ingresarPartidosJugador();
         boolean esCapitan = verificarCapitan(equipo);
@@ -156,7 +160,8 @@ public class JugadorService {
         }
     }
 
-    protected void buscarJugadorPorNombre(List<Equipo> equipos) {
+    @Override
+    public void buscarJugadorPorNombre(List<Equipo> equipos) {
         System.out.println("----- BUSCAR JUGADOR POR NOMBRE -----");
         boolean flag = true;
         while (flag) {

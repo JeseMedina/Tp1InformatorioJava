@@ -8,6 +8,7 @@ package fut5app.services;
 import fut5app.models.Entrenador;
 import fut5app.models.Equipo;
 import fut5app.models.Jugador;
+import fut5app.services.interfaces.IGestorArchivosService;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -21,11 +22,12 @@ import java.util.List;
  *
  * @author Jesé
  */
-public class GestorArchivos {
+public class GestorArchivos implements IGestorArchivosService {
 
     Scanner scanner = new Scanner(System.in);
 
-    protected void importarJugadoresDesdeArchivo(List<Equipo> equipos) {
+    @Override
+    public void importarJugadoresDesdeArchivo(List<Equipo> equipos) {
         System.out.println("----- IMPORTAR JUGADORES DESDE ARCHIVO -----");
         String rutaArchivo = obtenerRutaArchivo();
         if (rutaArchivo.isEmpty()) {
@@ -56,7 +58,8 @@ public class GestorArchivos {
         }
     }
 
-    protected void exportarJugadoresAArchivo(List<Equipo> equipos) {
+    @Override
+    public void exportarJugadoresAArchivo(List<Equipo> equipos) {
         System.out.println("----- EXPORTAR JUGADORES A ARCHIVO -----");
 
         String rutaArchivo = obtenerRutaArchivo();
